@@ -32,12 +32,16 @@ Node* insert(Node* root, int value) {
     return root;
 }
 
+
+
 void inorder(Node* node) {
     if (node == nullptr) return;
     inorder(node->left);
     cout << node->data << ' ';
     inorder(node->right);
 }
+
+
 
 int findMin(Node* root) {
     Node* current = root;
@@ -46,6 +50,9 @@ int findMin(Node* root) {
     }
     return current->data;
 }
+
+
+
 
 int height(Node* root){
     if(root == nullptr){
@@ -57,6 +64,9 @@ int height(Node* root){
     return 1 + max(leftHeight,rightHeight);
 }
 
+
+
+
 bool search(Node* root, int target) {
     Node* current = root;
     while (current != nullptr) {
@@ -66,6 +76,42 @@ bool search(Node* root, int target) {
     }
     return false;
 }
+
+
+
+
+
+Node* deleteNode(Node* root, int value) {
+    if (root == nullptr) return nullptr;
+
+    if (value < root->data) {
+        root->left = deleteNode(root->left, value);
+    }
+    else if (value > root->data) {
+        root->right = deleteNode(root->right, value);
+    }
+    else {
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        }
+        
+        if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
+        }
+        int minValue = findMin(root->right);
+        root->data = minValue;
+        root->right = deleteNode(root->right, minValue);
+    }
+    return root;
+}
+
+
+
+
 
 int main() {
     int n;
