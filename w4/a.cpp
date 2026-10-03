@@ -12,7 +12,9 @@ struct Node {
 
 Node* insert(Node* root, int value) {
     Node* newNode = new Node{value, nullptr, nullptr};
-    if (root == nullptr) return newNode;
+    if (root == nullptr){
+        return newNode;
+    }
 
     Node* current = root;
     while (true) {
@@ -62,11 +64,17 @@ int main() {
                 current = current->right;
             }
         
-            if (current == nullptr) break;
+            if (current == nullptr) {
+                break;
+            }
         }
 
-        if (current != nullptr) cout << "YES\n";
-        else cout << "NO\n";
+        if (current != nullptr){
+            cout << "YES\n";
+        }
+        else{
+            cout << "NO\n";
+            }
     }
     return 0;
 }
